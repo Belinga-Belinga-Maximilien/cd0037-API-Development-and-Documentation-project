@@ -1,6 +1,8 @@
 import json
 import os
+from secrets import choice
 from unicodedata import category
+from wsgiref.handlers import read_environ
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -204,12 +206,12 @@ def create_app(test_config=None):
             question = random.choice(format_stuff(all_questions))
         elif prevQuestions == [] and category['id'] != 0:
             question = random.choice(format_stuff(question_by_category))
-        elif prevQuestions != [] and category['id'] == 0:
-            question = random.choice(format_stuff(all_questions))
+        elif prevQuestions != [] and category['id'] != 0:
+            question = random.choice(format_stuff(question_by_category))
             if question in format_stuff(previous_questions):
-                question = random.choice(format_stuff(all_questions))
-        else: 
-            question = random.choice(question_by_category) 
+                question = random.choice(format_stuff(question_by_category))
+        else:
+            question = random.choice(format_stuff(all_questions))
 
         
         return jsonify({
