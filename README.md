@@ -112,6 +112,7 @@ We have the the following error handlers in our application
 - General:
     - Returns list of all categories
 - Sample: `curl http://localhost:5000/categories`
+-
 !['categories'](screenshots/categories.JPG)
 
 #### GET /questions
